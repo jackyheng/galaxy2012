@@ -6,7 +6,7 @@
 **     Component : TimerInt
 **     Version   : Component 02.157, Driver 02.02, CPU db: 2.87.097
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/5/26, 20:26
+**     Date/Time : 2012/5/27, 19:24
 **     Abstract  :
 **         This bean "TimerInt" implements a periodic interrupt.
 **         When the bean and its events are enabled, the "OnInterrupt"
@@ -48,7 +48,8 @@
 **         Flip-flop registers
 **              Mode                   : TMR0_SCR  [61447]
 **     Contents  :
-**         No public methods
+**         EnableEvent  - byte TI1_EnableEvent(void);
+**         DisableEvent - byte TI1_DisableEvent(void);
 **
 **     Copyright : 1997 - 2009 Freescale Semiconductor, Inc. All Rights Reserved.
 **     
@@ -61,6 +62,7 @@
 #include "Events.h"
 #include "TI1.h"
 
+static bool EnEvent;                   /* Enable/Disable events */
 
 
 /* Internal method prototypes */
@@ -103,6 +105,46 @@ static void SetPV(byte Val)
 
 /*
 ** ===================================================================
+**     Method      :  TI1_EnableEvent (component TimerInt)
+**
+**     Description :
+**         This method enables the events.
+**     Parameters  : None
+**     Returns     :
+**         ---             - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+** ===================================================================
+*/
+byte TI1_EnableEvent(void)
+{
+  EnEvent = TRUE;                      /* Set the flag "events enabled" */
+  return ERR_OK;                       /* OK */
+}
+
+/*
+** ===================================================================
+**     Method      :  TI1_DisableEvent (component TimerInt)
+**
+**     Description :
+**         This method disables the events.
+**     Parameters  : None
+**     Returns     :
+**         ---             - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+** ===================================================================
+*/
+byte TI1_DisableEvent(void)
+{
+  EnEvent = FALSE;                     /* Set the flag "events disabled" */
+  return ERR_OK;                       /* OK */
+}
+
+/*
+** ===================================================================
 **     Method      :  TI1_Init (component TimerInt)
 **
 **     Description :
@@ -124,6 +166,7 @@ void TI1_Init(void)
   setReg(TMR0_CMP2,31999);             /* Set up compare 2 register */
   /* TMR0_COMSCR: DBG_EN=0,??=0,??=0,??=0,??=0,??=0,??=0,TCF2EN=0,TCF1EN=0,TCF2=0,TCF1=0,CL2=1,CL1=2 */
   setReg(TMR0_COMSCR,6);               /* Compare load control */
+  EnEvent = TRUE;                      /* Enable events */
   SetCV((word)31999);                  /* Store appropriate value to the compare register according to the selected high speed CPU mode */
   SetPV((byte)8);                      /* Set prescaler register according to the selected high speed CPU mode */
   setRegBitGroup(TMR0_CTRL,CM,1);      /* Run counter */
@@ -143,7 +186,9 @@ void TI1_Init(void)
 void TI1_Interrupt(void)
 {
   clrRegBit(TMR0_SCR,TCF);             /* Reset interrupt request flag */
-  TI1_OnInterrupt();                   /* Invoke user event */
+  if (EnEvent) {                       /* Are the events enabled? */
+    TI1_OnInterrupt();                 /* Invoke user event */
+  }
 }
 
 /* END TI1. */

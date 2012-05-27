@@ -45,6 +45,7 @@ int speedL,speedR;
 unsigned char receive[15]={'0','0','.','0','0','0',' ','0','0','.','0','0','0'};
 int g_nSpeedControlCount=0;
 int g_nDirectionControlCount=0;
+bool AD_Flag = 0;
 //-------------------------------------------------------------------
 
 void main(void)
@@ -60,10 +61,18 @@ void main(void)
   AD1_Start();
   Puls1_Enable();
   Puls2_Enable();
-   
+  TI1_DisableEvent();
+  Cpu_Delay100US(30);
+  if(!AD_Flag){
+        calibrateSensor();
+        TI1_EnableEvent();
+        AD_Flag = 1;
+  }
+ 
   for(;;) 
   {
     /*******************设置程序的循环时间，控制串口的发送速度******************/
+    
     nLoop ++;
     if(nLoop >= LOOP_TIME) 	     
       nLoop = 0;

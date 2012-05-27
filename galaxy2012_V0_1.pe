@@ -1,11 +1,11 @@
 Processor Expert Version 0435
-ProjectModificationStamp=49
+ProjectModificationStamp=52
 
 [Header]
 Name=galaxy2012_V0_1
-SavedBy=joln
-ModificationStamp=49
-Date=2012-05-26
+SavedBy=Heng
+ModificationStamp=52
+Date=2012-05-27
 Product=Processor Expert version 3.00 for Freescale 56800/E family
 IDE=CW Plug-In IDE
 PEversion=4.35.0.5225
@@ -2136,19 +2136,19 @@ UsrMethodName=Disable
 ItemSymbol=EnableEvent
 ReadOnly=No
 UserReadOnly=No
-Index=1
-Value=No
+Index=0
+Value=Yes
 LastSelection=No
-LastUserSel=no
+LastUserSel=yes
 UsrMethodName=EnableEvent
 [ItemState]
 ItemSymbol=DisableEvent
 ReadOnly=No
 UserReadOnly=No
-Index=1
-Value=No
+Index=0
+Value=Yes
 LastSelection=No
-LastUserSel=no
+LastUserSel=yes
 UsrMethodName=DisableEvent
 [ItemState]
 ItemSymbol=SetPeriodMode

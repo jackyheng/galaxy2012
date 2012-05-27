@@ -14,7 +14,7 @@
 #define ACCmax                   3045//3020
 #define ACCmin                   1090//1020
 #define GRAVITY_ANGLE_RATIO                180/(ACCmax - ACCmin)             //180/(ACCmax - ACCmin)
-#define GYROSCOPE_ANGLE_RATIO              0.2//0.18                           //（3300/4096）/（0.67*9.1) = 0.132
+#define GYROSCOPE_ANGLE_RATIO              0.18//0.18                           
 #define GYROSCOPE_ANGLE_SIGMA_FREQUENCY    0.005                    //陀螺仪的测量周期
 #define GRAVITY_ADJUST_TIME_CONSTANT       2
 #define gyroOffset               1448//2651//2617                           //陀螺仪静止时的输出值
@@ -45,5 +45,6 @@ void AngleCalculate();
 void complementaryFilter();
 void AngleControl(void);
 void DirectionVoltageSigma(void);
+void calibrateSensor();
 //-------------------------------------------------------------------------------
 #endif

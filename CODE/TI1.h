@@ -6,7 +6,7 @@
 **     Component : TimerInt
 **     Version   : Component 02.157, Driver 02.02, CPU db: 2.87.097
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/5/26, 20:26
+**     Date/Time : 2012/5/27, 19:24
 **     Abstract  :
 **         This bean "TimerInt" implements a periodic interrupt.
 **         When the bean and its events are enabled, the "OnInterrupt"
@@ -48,7 +48,8 @@
 **         Flip-flop registers
 **              Mode                   : TMR0_SCR  [61447]
 **     Contents  :
-**         No public methods
+**         EnableEvent  - byte TI1_EnableEvent(void);
+**         DisableEvent - byte TI1_DisableEvent(void);
 **
 **     Copyright : 1997 - 2009 Freescale Semiconductor, Inc. All Rights Reserved.
 **     
@@ -68,6 +69,38 @@
 #include "IO_Map.h"
 #include "Cpu.h"
 
+
+byte TI1_EnableEvent(void);
+/*
+** ===================================================================
+**     Method      :  TI1_EnableEvent (component TimerInt)
+**
+**     Description :
+**         This method enables the events.
+**     Parameters  : None
+**     Returns     :
+**         ---             - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+** ===================================================================
+*/
+
+byte TI1_DisableEvent(void);
+/*
+** ===================================================================
+**     Method      :  TI1_DisableEvent (component TimerInt)
+**
+**     Description :
+**         This method disables the events.
+**     Parameters  : None
+**     Returns     :
+**         ---             - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+** ===================================================================
+*/
 
 void TI1_Init(void);
 /*

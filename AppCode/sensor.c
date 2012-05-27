@@ -20,12 +20,11 @@ float g_fGyroscopeAngleSpeed;                  //陀螺仪的角速度
 float g_fGyroscopeAngleIntegral;               //陀螺仪积分后的角度
 float fDeltaValue;
 float g_fCarAngle;
-float ANGLE_CONTROL_P = 35;                     //角度控制比例
+float ANGLE_CONTROL_P = 38;                     //角度控制比例
 float ANGLE_CONTROL_D = 0.1;//0.37;                     //角度控制微分
 float g_fAngleControlOut;
 int VOLTAGE_LEFT;
 int VOLTAGE_RIGHT;
-
 
 extern float g_fLeftVoltageSigma;
 extern float g_fRightVoltageSigma;
@@ -145,8 +144,8 @@ void complementaryFilter()
     fDeltaValue = (g_fGravityAngle - g_fCarAngle) / GRAVITY_ADJUST_TIME_CONSTANT;	
     g_fGyroscopeAngleIntegral += (g_fGyroscopeAngleSpeed + fDeltaValue) * GYROSCOPE_ANGLE_SIGMA_FREQUENCY;
 */
-	g_fGyroscopeAngleIntegral = ((0.98)*((g_fGyroscopeAngleIntegral) + 
-	(g_fGyroscopeAngleSpeed * GYROSCOPE_ANGLE_SIGMA_FREQUENCY)) + (0.02)*(g_fGravityAngle));
+	g_fGyroscopeAngleIntegral = ((0.99)*((g_fGyroscopeAngleIntegral) + 
+	(g_fGyroscopeAngleSpeed * GYROSCOPE_ANGLE_SIGMA_FREQUENCY)) + (0.01)*(g_fGravityAngle));
 		
 }
  

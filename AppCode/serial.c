@@ -33,12 +33,12 @@ extern unsigned int sensorValue[channal];
     
 void sendData()
 {
- /*   debugWord[0] = (int)(g_fGravityAngle * 5);                 //把数据放大，方便观察波形
-    debugWord[1] = (int)(g_fGyroscopeAngleIntegral * 5);
-    SendNum(debugWord[0]);
+    debugWord[0] = (int)(g_fGravityAngle * 10);                 //把数据放大，方便观察波形
+    debugWord[1] = (int)(g_fGyroscopeAngleIntegral * 10);
+    /*SendNum(debugWord[0]);
     AS1_SendChar(' ');
-    SendNum(debugWord[1]);     
-   */
+    SendNum(debugWord[1]); */    
+  
 
 
    
@@ -51,7 +51,7 @@ void sendData()
 */
 
 
-    SendNum((int)(RIGHT));
+   /* SendNum((int)(RIGHT));
     AS1_SendChar(' '); 
     
     SendNum((int)(LEFT));
@@ -59,7 +59,7 @@ void sendData()
 
 
     SendNum((int)g_fDirectionControlOut);
-    AS1_SendChar(' ');
+    AS1_SendChar(' ');*/
     
 /*    SendNum((int)(ANGLE_CONTROL_P*100));
     AS1_SendChar(' '); 
@@ -88,19 +88,19 @@ void sendData()
     AS1_SendChar(' ');  
  */ 
 
-/*    SendNum((int)(sensorValue[2]));
-    AS1_SendChar(' '); 
+   // SendNum((int)(sensorZero[0]));
+   // AS1_SendChar(' '); 
     
-    SendNum((int)(sensorValue[3]));
-    AS1_SendChar(' '); 
+    //SendNum((int)(sensorValue[0]));
+    //AS1_SendChar(' '); 
 
 
 
-*/  
+  
 
  
     SendNum((int)(DIR_CONTROL_P*100));
-    AS1_SendChar(' ');    
+   // AS1_SendChar(' ');    
     
 /*   SendNum((int)(LEFT));
     AS1_SendChar(' ');  

@@ -27,6 +27,7 @@ extern unsigned int SCIcount;
 extern unsigned int speedL,speedR;
 extern int g_nSpeedControlCount;
 extern int g_nDirectionControlCount;
+extern bool AD_Flag;
 //--------------------------------------------------------------------
 
 /*
@@ -84,7 +85,7 @@ void TI1_OnInterrupt(void)
   
   if(oneMsCounter == 1)            
   {
-     updataSensor();  		       //读取ADC的值
+     if(AD_Flag)    updataSensor();  		       //读取ADC的值
   }
 //--------------------------------------------------  
   else if(oneMsCounter == 2)       

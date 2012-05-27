@@ -776,10 +776,10 @@
       <Pin_for_I_O v="GPIOB1_SS_B_SDA"/>
       <Pin_signal v=""/>
       <Pull_resistor sel_value="no pull resistor" v="autoselected pull"/>
-      <Open_drain v="push-pull"/>
-      <Direction v="Input/Output"/>
+      <Open_drain sel_value="The settings is irrelevant for input direction" v="push-pull"/>
+      <Direction v="Input"/>
       <group name="Initialization">
-        <Init__direction v="Output"/>
+        <Init__direction v="Input"/>
         <Init__value v="0"/>
       </group>
       <Safe_mode v="yes"/>
@@ -788,13 +788,13 @@
 
     <Methods>
       <GetDir v="don&apos;t generate code"/>
-      <SetDir v="generate code"/>
+      <SetDir v="don&apos;t generate code"/>
       <SetInput v="don&apos;t generate code"/>
       <SetOutput v="don&apos;t generate code"/>
       <GetVal v="generate code"/>
-      <PutVal v="generate code"/>
-      <ClrVal v="generate code"/>
-      <SetVal v="generate code"/>
+      <PutVal v="don&apos;t generate code"/>
+      <ClrVal v="don&apos;t generate code"/>
+      <SetVal v="don&apos;t generate code"/>
       <NegVal v="don&apos;t generate code"/>
       <ConnectPin v="don&apos;t generate code"/>
       <GetRawVal v="don&apos;t generate code"/>

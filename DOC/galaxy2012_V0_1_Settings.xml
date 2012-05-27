@@ -223,8 +223,8 @@
     <Methods>
       <Enable v="don&apos;t generate code"/>
       <Disable v="don&apos;t generate code"/>
-      <EnableEvent v="don&apos;t generate code"/>
-      <DisableEvent v="don&apos;t generate code"/>
+      <EnableEvent v="generate code"/>
+      <DisableEvent v="generate code"/>
       <SetPeriodMode v="don&apos;t generate code"/>
       <SetPeriodTicks16 v="don&apos;t generate code"/>
       <SetPeriodTicks32 v="don&apos;t generate code"/>

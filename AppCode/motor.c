@@ -15,7 +15,7 @@
 //------------------------------------------------------------
 byte pwmval;
 float g_fcarSpeed;
-float CAR_SPEED_SET=300;//30;       /////设置车速
+float CAR_SPEED_SET=500;//30;       /////设置车速
 float SPEED_CONTROL_P=0.8;//0.7;
 float SPEED_CONTROL_I=0.0002;
 float g_fspeedControlIntegral=0;
@@ -150,7 +150,7 @@ byte motorOutput(float fLeftVoltage, float fRightVoltage)
 void motorControl()
 {
 	if((g_fGyroscopeAngleIntegral < 30.0) && (g_fGyroscopeAngleIntegral > -30.0))     
- 		pwmval=motorOutput(g_fAngleControlOut - g_fspeedControlOut-g_fDirectionControlOut,
+ 		pwmval=motorOutput(g_fAngleControlOut - g_fspeedControlOut-g_fDirectionControlOut + 5,
   		                   g_fAngleControlOut - g_fspeedControlOut+g_fDirectionControlOut);
   
   		                   
