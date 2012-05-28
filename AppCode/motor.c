@@ -15,9 +15,9 @@
 //------------------------------------------------------------
 byte pwmval;
 float g_fcarSpeed;
-float CAR_SPEED_SET=500;//30;       /////设置车速
-float SPEED_CONTROL_P=0.8;//0.7;
-float SPEED_CONTROL_I=0.0002;
+float CAR_SPEED_SET=350;//500;       /////设置车速
+float SPEED_CONTROL_P=1.0;//1.0;//0.8;
+float SPEED_CONTROL_I=0.8;//0.6;//0.0002;
 float g_fspeedControlIntegral=0;
 float g_fspeedControlOutOld=0;
 float g_fspeedControlOutNew=0;
@@ -36,8 +36,9 @@ float g_fDirectionControlOutNew = 0;
 float g_fLeftVoltageSigma=0;
 float g_fRightVoltageSigma=0;
 float LEFT_RIGHT_MINIMUM = 7;
-float DIR_CONTROL_P=80;
+float DIR_CONTROL_P=85;
 float DIR_CONTROL_D=0;
+
 
 
 extern int speedL,speedR;

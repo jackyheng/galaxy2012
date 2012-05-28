@@ -20,8 +20,8 @@ float g_fGyroscopeAngleSpeed;                  //陀螺仪的角速度
 float g_fGyroscopeAngleIntegral;               //陀螺仪积分后的角度
 float fDeltaValue;
 float g_fCarAngle;
-float ANGLE_CONTROL_P = 38;                     //角度控制比例
-float ANGLE_CONTROL_D = 0.1;//0.37;                     //角度控制微分
+float ANGLE_CONTROL_P = 20.0;//38;                     //角度控制比例
+float ANGLE_CONTROL_D = 0.05;//0.37;                     //角度控制微分
 float g_fAngleControlOut;
 int VOLTAGE_LEFT;
 int VOLTAGE_RIGHT;
@@ -124,8 +124,8 @@ void DirectionVoltageSigma(void)
 
 void AngleCalculate() 
 {	
-    g_fGravityAngle = (AccValue * GRAVITY_ANGLE_RATIO) ;
-	g_fGyroscopeAngleSpeed = (gyroValue * GYROSCOPE_ANGLE_RATIO) ;
+    g_fGravityAngle = AccValue * GRAVITY_ANGLE_RATIO * 2.8444;
+	g_fGyroscopeAngleSpeed = gyroValue * GYROSCOPE_ANGLE_RATIO * 2.8444;
 	
     complementaryFilter();	
 }

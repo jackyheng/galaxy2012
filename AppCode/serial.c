@@ -33,11 +33,11 @@ extern unsigned int sensorValue[channal];
     
 void sendData()
 {
-    debugWord[0] = (int)(g_fGravityAngle * 10);                 //把数据放大，方便观察波形
-    debugWord[1] = (int)(g_fGyroscopeAngleIntegral * 10);
+    debugWord[0] = (int)(g_fGravityAngle * 3);                 //把数据放大，方便观察波形
+    debugWord[1] = (int)(g_fGyroscopeAngleIntegral * 3);
     /*SendNum(debugWord[0]);
     AS1_SendChar(' ');
-    SendNum(debugWord[1]); */    
+    SendNum(debugWord[1]);    */ 
   
 
 
@@ -61,12 +61,12 @@ void sendData()
     SendNum((int)g_fDirectionControlOut);
     AS1_SendChar(' ');*/
     
-/*    SendNum((int)(ANGLE_CONTROL_P*100));
-    AS1_SendChar(' '); 
+    //SendNum((int)(ANGLE_CONTROL_P*100));
+    //AS1_SendChar(' '); 
     
-    SendNum((int)(ANGLE_CONTROL_D*100));
-    AS1_SendChar(' ');
-    */             
+    //SendNum((int)(ANGLE_CONTROL_D*100));
+    //AS1_SendChar(' ');
+              
 //    SendNum((int)(speedL)); 
 //    AS1_SendChar(' ');
 
@@ -81,25 +81,28 @@ void sendData()
     SendNum((int)(CAR_SPEED_SET));
     AS1_SendChar(' '); 
 */      
-/*    
+   
     SendNum((int)(SPEED_CONTROL_P*100));
-    AS1_SendChar(' ');     
+   AS1_SendChar(' ');     
     SendNum((int)(SPEED_CONTROL_I*100));
-    AS1_SendChar(' ');  
- */ 
+ //   AS1_SendChar(' ');  
+ 
 
-   // SendNum((int)(sensorZero[0]));
-   // AS1_SendChar(' '); 
+    /*SendNum((int)(sensorZero[0]));
+    AS1_SendChar(' '); 
     
-    //SendNum((int)(sensorValue[0]));
-    //AS1_SendChar(' '); 
+    SendNum((int)(sensorValue[0]));
+    AS1_SendChar(' '); 
 
-
+    SendNum((int)(sensorZero[1]));
+    AS1_SendChar(' '); 
+    
+    SendNum((int)(sensorValue[1]));*/
 
   
 
  
-    SendNum((int)(DIR_CONTROL_P*100));
+   // SendNum((int)(DIR_CONTROL_P*100));
    // AS1_SendChar(' ');    
     
 /*   SendNum((int)(LEFT));
@@ -233,12 +236,12 @@ void receiveData()
        D=0;
      */    
      
-//     ANGLE_CONTROL_P = P;
-//     ANGLE_CONTROL_D = D; 
-//     SPEED_CONTROL_P=P;
-//     SPEED_CONTROL_I=D; 
+     //ANGLE_CONTROL_P = P;
+     //ANGLE_CONTROL_D = D; 
+     //SPEED_CONTROL_P=P;
+     //SPEED_CONTROL_I=D; 
      
-     DIR_CONTROL_P=P;
+     //DIR_CONTROL_P=P;
 //     CAR_SPEED_SET=-D; 
     
 }
