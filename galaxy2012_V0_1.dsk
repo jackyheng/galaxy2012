@@ -21,8 +21,8 @@ CpuPanViewMode=Default
 ViewSizeIndex=0
 
 [ErrorPanel]
-Status=hiden
-WindowState=NORMAL
+Status=Visible
+WindowState=MAXIMAL
 Rect=[-8|58|627|140]
 
 [ResourceMeter]

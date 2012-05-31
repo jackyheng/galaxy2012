@@ -35,20 +35,20 @@ void sendData()
 {
     debugWord[0] = (int)(g_fGravityAngle * 3);                 //把数据放大，方便观察波形
     debugWord[1] = (int)(g_fGyroscopeAngleIntegral * 3);
-    /*SendNum(debugWord[0]);
+   /* SendNum(debugWord[0]);
     AS1_SendChar(' ');
-    SendNum(debugWord[1]);    */ 
+    SendNum(debugWord[1]);  */   
   
 
 
    
-/*
-    SendNum((int)(AccValue));
+
+    SendNum((int)(VOLTAGE_LEFT));
     AS1_SendChar(' '); 
     
-    SendNum((int)(gyroValue));
+    SendNum((int)(VOLTAGE_RIGHT));
     AS1_SendChar(' ');      
-*/
+
 
 
    /* SendNum((int)(RIGHT));
@@ -82,13 +82,13 @@ void sendData()
     AS1_SendChar(' '); 
 */      
    
-    SendNum((int)(SPEED_CONTROL_P*100));
-   AS1_SendChar(' ');     
-    SendNum((int)(SPEED_CONTROL_I*100));
+    //SendNum((int)(SPEED_CONTROL_P*100));
+   //AS1_SendChar(' ');     
+    //SendNum((int)(SPEED_CONTROL_I*100));
  //   AS1_SendChar(' ');  
  
 
-    /*SendNum((int)(sensorZero[0]));
+   /* SendNum((int)(sensorZero[0]));
     AS1_SendChar(' '); 
     
     SendNum((int)(sensorValue[0]));
@@ -102,7 +102,7 @@ void sendData()
   
 
  
-   // SendNum((int)(DIR_CONTROL_P*100));
+    SendNum((int)(DIR_CONTROL_P*100));
    // AS1_SendChar(' ');    
     
 /*   SendNum((int)(LEFT));
@@ -117,12 +117,12 @@ void sendData()
  */   
         
  //   SendNum((int)(pwmval));
- //   AS1_SendChar(' ');
+   // AS1_SendChar(' ');
         
-//    SendNum((int)speedL);
-//    AS1_SendChar(' ');
+    //SendNum((int)speedL);
+    //AS1_SendChar(' ');
      
-//    SendNum((int)speedR);
+    //SendNum((int)speedR);
 //    AS1_SendChar(' ');       
         
     AS1_SendChar(0x0d);                       
@@ -241,7 +241,7 @@ void receiveData()
      //SPEED_CONTROL_P=P;
      //SPEED_CONTROL_I=D; 
      
-     //DIR_CONTROL_P=P;
+     DIR_CONTROL_P=P;
 //     CAR_SPEED_SET=-D; 
     
 }

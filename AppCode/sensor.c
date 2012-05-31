@@ -77,7 +77,7 @@ void updataSensor()
 	    }
 	    sensorValue[n] = (unsigned int)(v / ADC_Counter);
 	}
-	AccValue = (int)(-1*(sensorValue[0] - sensorZero[0]));
+	AccValue = (int)(-1*(sensorValue[0] - AccOffset));
 	gyroValue = (int)(sensorValue[1] - sensorZero[1]) * -1;
 
     VOLTAGE_LEFT = (int)sensorValue[2];	
