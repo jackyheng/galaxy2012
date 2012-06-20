@@ -15,6 +15,7 @@ unsigned int sensorValue[channal];
 unsigned int sensorZero[channal];         
 float AccValue;                                //加速度减去静止数得到的数
 float gyroValue;                               //角速度减去静止数得到的数
+float gyroValue2;
 float g_fGravityAngle;                         //加速度计算后的角度
 float g_fGyroscopeAngleSpeed;                  //陀螺仪的角速度
 float g_fGyroscopeAngleIntegral;               //陀螺仪积分后的角度
@@ -79,13 +80,10 @@ void updataSensor()
 	}
 	AccValue = (int)(-1*(sensorValue[0] - AccOffset));
 	gyroValue = (int)(sensorValue[1] - sensorZero[1]) * -1;
+	gyroValue2 = (int)(sensorValue[4] - sensorZero[4]) * -1;
 
     VOLTAGE_LEFT = (int)sensorValue[2];	
 	VOLTAGE_RIGHT = (int)sensorValue[3];	
-/*    g_fLeftVoltageSigma = (int)(sensorValue[2] - LeftOffset)+g_fLeftVoltageSigma;	
-	g_fRightVoltageSigma = (int)(sensorValue[3] - RightOffset)+g_fRightVoltageSigma;
-
-*/	
 
 }
 	
@@ -102,7 +100,9 @@ void updataSensor()
 
 void DirectionVoltageSigma(void)
 {		
-	int nLeft, nRight;
+	int nLeft, nRight;	
+		
+	
 	if(VOLTAGE_LEFT > LeftOffset) 		nLeft = VOLTAGE_LEFT - LeftOffset;
 	else nLeft = 0;
 	if(VOLTAGE_RIGHT > RightOffset) 	nRight = VOLTAGE_RIGHT - RightOffset;
@@ -140,10 +140,6 @@ void AngleCalculate()
   
 void complementaryFilter()
 {
-/*	g_fCarAngle = g_fGyroscopeAngleIntegral;
-    fDeltaValue = (g_fGravityAngle - g_fCarAngle) / GRAVITY_ADJUST_TIME_CONSTANT;	
-    g_fGyroscopeAngleIntegral += (g_fGyroscopeAngleSpeed + fDeltaValue) * GYROSCOPE_ANGLE_SIGMA_FREQUENCY;
-*/
 	g_fGyroscopeAngleIntegral = ((0.99)*((g_fGyroscopeAngleIntegral) + 
 	(g_fGyroscopeAngleSpeed * GYROSCOPE_ANGLE_SIGMA_FREQUENCY)) + (0.01)*(g_fGravityAngle));
 		

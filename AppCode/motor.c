@@ -15,7 +15,7 @@
 //------------------------------------------------------------
 byte pwmval;
 float g_fcarSpeed;
-float CAR_SPEED_SET=300;//500;       /////设置车速
+float CAR_SPEED_SET=300;       /////设置车速
 float SPEED_CONTROL_P=1.0;//0.8;
 float SPEED_CONTROL_I=0.8;//0.0002;
 float g_fspeedControlIntegral=0;
@@ -35,8 +35,8 @@ float g_fDirectionControlOut = 0;
 float g_fDirectionControlOutNew = 0;
 float g_fLeftVoltageSigma=0;
 float g_fRightVoltageSigma=0;
-float LEFT_RIGHT_MINIMUM = 7;
-float DIR_CONTROL_P=85;
+float LEFT_RIGHT_MINIMUM = 20;
+float DIR_CONTROL_P=100;
 float DIR_CONTROL_D=0;
 
 
@@ -150,7 +150,7 @@ byte motorOutput(float fLeftVoltage, float fRightVoltage)
   */
 void motorControl()
 {
-	if((g_fGyroscopeAngleIntegral < 30.0) && (g_fGyroscopeAngleIntegral > -30.0))     
+	if((g_fGyroscopeAngleIntegral < 100.0) && (g_fGyroscopeAngleIntegral > -100.0))     
  		pwmval=motorOutput(g_fAngleControlOut - g_fspeedControlOut-g_fDirectionControlOut,
   		                   g_fAngleControlOut - g_fspeedControlOut+g_fDirectionControlOut);
   
@@ -160,7 +160,7 @@ void motorControl()
 //  		pwmval=motorOutput(g_fAngleControlOut,g_fAngleControlOut);
   		                   
   		                    		                     		                     		                   
-  	else if((g_fGyroscopeAngleIntegral >= 30.0) || (g_fGyroscopeAngleIntegral <= -30.0))
+  	else if((g_fGyroscopeAngleIntegral >= 100.0) || (g_fGyroscopeAngleIntegral <= -100.0))
   		pwmval=motorOutput(0,0);
 }
 
@@ -214,25 +214,19 @@ void speedControlOutput(void)
 }
 
 
-
-
-
-
-
-
-
 /**************************************************************************************
 
              方向控制
 
 **************************************************************************************/
-float SUB=0;
+
+float SUB=0,ADD = 0;
 int   RIGHT=0,LEFT=0;
 
 void DirectionControl(void)
 {
     float fLeftRightAdd, fLeftRightSub, fValue; 
-   // float fDValue; 
+    float fDValue; 
     int nLeft, nRight;
     nLeft = (int)(g_fLeftVoltageSigma /= DIRECTION_CONTROL_COUNT);
     nRight = (int)(g_fRightVoltageSigma /= DIRECTION_CONTROL_COUNT);
@@ -249,10 +243,11 @@ void DirectionControl(void)
     if(fLeftRightAdd <= LEFT_RIGHT_MINIMUM) {     //LEFT_RIGHT_MINIMUM = 
         g_fDirectionControlOutNew = 0;
     } else {
-     
+        if(fLeftRightAdd)
         fValue = fLeftRightSub * DIR_CONTROL_P / fLeftRightAdd;
         //fDValue = DIR_CONTROL_D_VALUE-DIRECTION_OFFSET;
-        //fDValue *= DIR_CONTROL_D;
+        fDValue = gyroValue2;
+        fDValue *= DIR_CONTROL_D;
        
         //fValue += fDValue;
         
@@ -264,6 +259,7 @@ void DirectionControl(void)
     LEFT=nLeft;
     RIGHT=nRight;
     SUB=fLeftRightSub;
+    ADD = fLeftRightAdd;
         
         
 }

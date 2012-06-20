@@ -6,7 +6,7 @@
 **     Component : ADC
 **     Version   : Component 01.580, Driver 02.05, CPU db: 2.87.097
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/5/26, 20:26
+**     Date/Time : 2012/6/3, 12:29
 **     Abstract  :
 **         This device "ADC" implements an A/D converter,
 **         its control methods and interrupt/event handling procedure.
@@ -78,6 +78,13 @@
 **              Port name              : GPIOC
 **              Bit number (in port)   : 5
 **              Bit mask of the port   : 32
+**              Port data register     : GPIO_C_DR   [61729]
+**              Port control register  : GPIO_C_DDR  [61730]
+**              Port function register : GPIO_C_PER  [61731]
+**
+**              Port name              : GPIOC
+**              Bit number (in port)   : 6
+**              Bit mask of the port   : 64
 **              Port data register     : GPIO_C_DR   [61729]
 **              Port control register  : GPIO_C_DDR  [61730]
 **              Port function register : GPIO_C_PER  [61731]

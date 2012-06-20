@@ -16,24 +16,24 @@ Rect=[-8|58|326|534]
 [CpuPanel]
 Status=hiden
 WindowState=NORMAL
-Rect=[-8|58|825|627]
+Rect=[-8|58|1382|675]
 CpuPanViewMode=Default
 ViewSizeIndex=0
 
 [ErrorPanel]
-Status=Visible
-WindowState=MAXIMAL
-Rect=[-8|58|627|140]
+Status=hiden
+WindowState=NORMAL
+Rect=[-8|58|1382|675]
 
 [ResourceMeter]
 Status=hiden
 WindowState=NORMAL
-Rect=[-8|58|1028|148]
+Rect=[-8|90|1028|148]
 
 [BeanSelector]
 Status=hiden
 WindowState=NORMAL
-Rect=[-4|58|1288|728]
+Rect=[-8|58|1296|728]
 BF_ForTgtCpuOnly=No
 BF_LicensedOnly=Yes
 BF_BA_AllQuestions=Yes
@@ -41,7 +41,7 @@ BF_BA_AllQuestions=Yes
 [ObjInspector]
 Status=hiden
 WindowState=NORMAL
-Rect=[-8|58|1296|728]
+Rect=[-8|58|1382|675]
 ObjInspectorDockedWithPrphInit=No
 ColWidth01=248
 ColWidth02=497
@@ -59,7 +59,7 @@ ViewItemLevel=ADVANCED
 [PrphInspector]
 Status=hiden
 WindowState=NORMAL
-Rect=[1040|58|326|417]
+Rect=[1040|90|326|417]
 ViewMode=PrphUsageReport
 SortRegsByAddr=Yes
 GroupRegisters=No

@@ -9,7 +9,7 @@
 #define __SENSOR__H
 //-------------------------------------------------------------------------------
 
-#define channal                  4                    //一共要读的AD端口数
+#define channal                  5                    //一共要读的AD端口数
 #define ADC_Counter              20                   //计算平均数的次数
 #define ACCmax                   3006//3020
 #define ACCmin                   1014//1020
@@ -19,8 +19,8 @@
 #define GRAVITY_ADJUST_TIME_CONSTANT       2
 #define gyroOffset               1448//2651//2617                           //陀螺仪静止时的输出值
 #define AccOffset                2060//2049                           //加速度静止时的输出值
-#define RightOffset              14
-#define LeftOffset               20
+#define RightOffset              90
+#define LeftOffset               109
 //-------------------------------------------------------------------------------
 
 
@@ -37,6 +37,9 @@ extern float g_fGyroscopeAngleSpeed;
 extern float ANGLE_CONTROL_P;
 extern float ANGLE_CONTROL_D;
 extern float  g_fAngleControlOut;
+extern float g_fLeftVoltageSigma;
+extern float g_fRightVoltageSigma;
+extern float gyroValue2;
 //-------------------------------------------------------------------------------
 
 

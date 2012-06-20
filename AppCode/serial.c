@@ -18,7 +18,7 @@ int debugWord[2];
 extern unsigned char receive[15];
 extern byte pwmval;
 extern unsigned int speedL,speedR;
-extern float SUB;
+extern float SUB,ADD;
 extern int   RIGHT,LEFT;
 extern unsigned int sensorValue[channal];
 //----------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ void sendData()
 
    
 
-    SendNum((int)(VOLTAGE_LEFT));
+    /*SendNum((int)(VOLTAGE_LEFT));
     AS1_SendChar(' '); 
     
     SendNum((int)(VOLTAGE_RIGHT));
@@ -51,15 +51,15 @@ void sendData()
 
 
 
-   /* SendNum((int)(RIGHT));
+    SendNum((int)LEFT);
     AS1_SendChar(' '); 
     
-    SendNum((int)(LEFT));
-    AS1_SendChar(' ');      
+    SendNum((int)RIGHT);
+    AS1_SendChar(' '); */     
 
 
-    SendNum((int)g_fDirectionControlOut);
-    AS1_SendChar(' ');*/
+    //SendNum((int)g_fDirectionControlOutNew);
+    //AS1_SendChar(' ');
     
     //SendNum((int)(ANGLE_CONTROL_P*100));
     //AS1_SendChar(' '); 
@@ -88,41 +88,41 @@ void sendData()
  //   AS1_SendChar(' ');  
  
 
-   /* SendNum((int)(sensorZero[0]));
-    AS1_SendChar(' '); 
+   // SendNum((int)(sensorValue[2]));
+   // AS1_SendChar(' '); 
     
-    SendNum((int)(sensorValue[0]));
-    AS1_SendChar(' '); 
+    //SendNum((int)(sensorValue[3]));
+    //AS1_SendChar(' '); 
 
-    SendNum((int)(sensorZero[1]));
-    AS1_SendChar(' '); 
+    //SendNum((int)(sensorZero[1]));
+    //AS1_SendChar(' '); 
     
-    SendNum((int)(sensorValue[1]));*/
+    //SendNum((int)(sensorValue[1]));
 
-  
+
 
  
-    SendNum((int)(DIR_CONTROL_P*100));
-   // AS1_SendChar(' ');    
+    SendNum((int)DIR_CONTROL_P);
+    //AS1_SendChar(' ');    
+    //SendNum((int)DIR_CONTROL_D);
+      //SendNum((int)LEFT);
+      //AS1_SendChar(' ');  
     
-/*   SendNum((int)(LEFT));
-    AS1_SendChar(' ');  
+      //SendNum((int)RIGHT);
+   // AS1_SendChar(' '); 
     
-        SendNum((int)(RIGHT));
-    AS1_SendChar(' '); 
+      //SendNum((int)VOLTAGE_LEFT);
+      //AS1_SendChar(' '); 
+      //SendNum((int)VOLTAGE_RIGHT);
     
-        SendNum((int)(SUB));
-    AS1_SendChar(' '); 
-
- */   
         
- //   SendNum((int)(pwmval));
+    //SendNum((int)ADD);
    // AS1_SendChar(' ');
         
-    //SendNum((int)speedL);
+    //SendNum((int)sensorValue[2]);
     //AS1_SendChar(' ');
      
-    //SendNum((int)speedR);
+   // SendNum((int)sensorValue[3]);
 //    AS1_SendChar(' ');       
         
     AS1_SendChar(0x0d);                       
@@ -208,19 +208,19 @@ void SendNum(int num)
 void receiveData()
 {
      double P,D;
-/*   
+   
      P=(receive[0]-0x30)*100;
      P=P+(receive[1]-0x30)*10;
      P=P+receive[2]-0x30;
      P=P+(receive[4]-0x30)*0.1;
      P=P+(receive[5]-0x30)*0.01;
-     */
+     
 
-     P=(receive[0]-0x30)*10;
+     /*P=(receive[0]-0x30)*10;
      P=P+receive[1]-0x30;
      P=P+(receive[3]-0x30)*0.1;
      P=P+(receive[4]-0x30)*0.01;
-     P=P+(receive[5]-0x30)*0.001;      
+     P=P+(receive[5]-0x30)*0.001;      */
      
      D=(receive[7]-0x30)*10;
      D=D+receive[8]-0x30;
@@ -241,7 +241,8 @@ void receiveData()
      //SPEED_CONTROL_P=P;
      //SPEED_CONTROL_I=D; 
      
-     DIR_CONTROL_P=P;
+       DIR_CONTROL_P=P;
+      // DIR_CONTROL_D=D;
 //     CAR_SPEED_SET=-D; 
     
 }

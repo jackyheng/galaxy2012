@@ -7,7 +7,7 @@
 **     Version   : Component 01.022, Driver 02.08, CPU db: 2.87.097
 **     Datasheet :  MC56F8300UM/D - Rev. 1.0
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/5/26, 20:26
+**     Date/Time : 2012/6/3, 12:29
 **     Abstract  :
 **
 **     Settings  :
@@ -255,8 +255,8 @@ void PE_low_level_init(void)
   clrSetReg16Bits(INTC_IPR3, 16448U, 32896U); 
   /* INTC_IPR4: ADC_ZC_IPL=2 */
   clrSetReg16Bits(INTC_IPR4, 4U, 8U);   
-  /* GPIO_C_PER: PE5=1,PE4=1,PE1=1,PE0=1 */
-  setReg16Bits(GPIO_C_PER, 51U);        
+  /* GPIO_C_PER: PE6=1,PE5=1,PE4=1,PE1=1,PE0=1 */
+  setReg16Bits(GPIO_C_PER, 115U);       
   /* GPIO_A_PER: PE|=127 */
   setReg16Bits(GPIO_A_PER, 127U);       
   /* SIM_CLKOUT: PWM3_b=0,PWM2_b=0,PWM1_b=0,PWM0_b=0 */

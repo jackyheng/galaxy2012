@@ -47,6 +47,7 @@ extern float CAR_SPEED_SET;
 extern float g_nDirectionControlPeriod;
 extern float g_fspeedControlIntegral;
 extern float g_fDirectionControlOut;
+extern float g_fDirectionControlOutNew;
 
 extern float DIR_CONTROL_P;
 extern float DIR_CONTROL_D;

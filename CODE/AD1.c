@@ -6,7 +6,7 @@
 **     Component : ADC
 **     Version   : Component 01.580, Driver 02.05, CPU db: 2.87.097
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/5/26, 20:26
+**     Date/Time : 2012/6/3, 12:29
 **     Abstract  :
 **         This device "ADC" implements an A/D converter,
 **         its control methods and interrupt/event handling procedure.
@@ -78,6 +78,13 @@
 **              Port name              : GPIOC
 **              Bit number (in port)   : 5
 **              Bit mask of the port   : 32
+**              Port data register     : GPIO_C_DR   [61729]
+**              Port control register  : GPIO_C_DDR  [61730]
+**              Port function register : GPIO_C_PER  [61731]
+**
+**              Port name              : GPIOC
+**              Bit number (in port)   : 6
+**              Bit mask of the port   : 64
 **              Port data register     : GPIO_C_DR   [61729]
 **              Port control register  : GPIO_C_DDR  [61730]
 **              Port function register : GPIO_C_PER  [61731]
@@ -392,7 +399,8 @@ byte AD1_GetValue16(word *Values)
   *Values++ = (getReg(ADC_ADRSLT0) + 0) << 1; /* Store value from result register of device to user buffer */
   *Values++ = (getReg(ADC_ADRSLT1) + 0) << 1; /* Store value from result register of device to user buffer */
   *Values++ = (getReg(ADC_ADRSLT2) + 0) << 1; /* Store value from result register of device to user buffer */
-  *Values = (getReg(ADC_ADRSLT3) + 0) << 1; /* Store value from result register of device to user buffer */
+  *Values++ = (getReg(ADC_ADRSLT3) + 0) << 1; /* Store value from result register of device to user buffer */
+  *Values = (getReg(ADC_ADRSLT4) + 0) << 1; /* Store value from result register of device to user buffer */
   return ERR_OK;                       /* OK */
 }
 
@@ -424,6 +432,8 @@ void AD1_Init(void)
   setReg(ADC_ADOFS2,0);                /* Set offset reg. 2 */
   /* ADC_ADOFS3: ??=0,OFFSET=0,??=0,??=0,??=0 */
   setReg(ADC_ADOFS3,0);                /* Set offset reg. 3 */
+  /* ADC_ADOFS4: ??=0,OFFSET=0,??=0,??=0,??=0 */
+  setReg(ADC_ADOFS4,0);                /* Set offset reg. 4 */
   /* ADC_ADHLMT0: ??=0,HLMT=4095,??=0,??=0,??=0 */
   setReg(ADC_ADHLMT0,32760);           /* Set high limit reg. 0 */
   /* ADC_ADHLMT1: ??=0,HLMT=4095,??=0,??=0,??=0 */
@@ -432,6 +442,8 @@ void AD1_Init(void)
   setReg(ADC_ADHLMT2,32760);           /* Set high limit reg. 2 */
   /* ADC_ADHLMT3: ??=0,HLMT=4095,??=0,??=0,??=0 */
   setReg(ADC_ADHLMT3,32760);           /* Set high limit reg. 3 */
+  /* ADC_ADHLMT4: ??=0,HLMT=4095,??=0,??=0,??=0 */
+  setReg(ADC_ADHLMT4,32760);           /* Set high limit reg. 4 */
   /* ADC_ADLLMT0: ??=0,LLMT=0,??=0,??=0,??=0 */
   setReg(ADC_ADLLMT0,0);               /* Set low limit reg. 0 */
   /* ADC_ADLLMT1: ??=0,LLMT=0,??=0,??=0,??=0 */
@@ -440,16 +452,20 @@ void AD1_Init(void)
   setReg(ADC_ADLLMT2,0);               /* Set low limit reg. 2 */
   /* ADC_ADLLMT3: ??=0,LLMT=0,??=0,??=0,??=0 */
   setReg(ADC_ADLLMT3,0);               /* Set low limit reg. 3 */
+  /* ADC_ADLLMT4: ??=0,LLMT=0,??=0,??=0,??=0 */
+  setReg(ADC_ADLLMT4,0);               /* Set low limit reg. 4 */
   /* ADC_ADZCSTAT: ??=1,??=1,??=1,??=1,??=1,??=1,??=1,??=1,ZCS7=1,ZCS6=1,ZCS5=1,ZCS4=1,ZCS3=1,ZCS2=1,ZCS1=1,ZCS0=1 */
   setReg(ADC_ADZCSTAT,65535);          /* Clear zero crossing status flags */
   /* ADC_ADLSTAT: HLS7=1,HLS6=1,HLS5=1,HLS4=1,HLS3=1,HLS2=1,HLS1=1,HLS0=1,LLS7=1,LLS6=1,LLS5=1,LLS4=1,LLS3=1,LLS2=1,LLS1=1,LLS0=1 */
   setReg(ADC_ADLSTAT,65535);           /* Clear high and low limit status */
   /* ADC_ADSTAT: CIP0=0,CIP1=0,??=0,EOSI1=0,EOSI0=1,ZCI=0,LLMTI=0,HLMTI=0,RDY7=0,RDY6=0,RDY5=0,RDY4=0,RDY3=0,RDY2=0,RDY1=0,RDY0=0 */
   setReg(ADC_ADSTAT,2048);             /* Clear EOSI flag */
-  /* ADC_ADSDIS: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,DS7=1,DS6=1,DS5=1,DS4=1,DS3=0,DS2=0,DS1=0,DS0=0 */
-  setReg(ADC_ADSDIS,240);              /* Enable/disable of samples */
+  /* ADC_ADSDIS: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,DS7=1,DS6=1,DS5=1,DS4=0,DS3=0,DS2=0,DS1=0,DS0=0 */
+  setReg(ADC_ADSDIS,224);              /* Enable/disable of samples */
   /* ADC_ADLST1: ??=0,SAMPLE3=5,??=0,SAMPLE2=4,??=0,SAMPLE1=1,??=0,SAMPLE0=0 */
   setReg(ADC_ADLST1,21520);            /* Set ADC channel list reg. */
+  /* ADC_ADLST2: ??=0,SAMPLE7=0,??=0,SAMPLE6=0,??=0,SAMPLE5=0,??=0,SAMPLE4=6 */
+  setReg(ADC_ADLST2,6);                /* Set ADC channel list reg. */
   /* ADC_ADZCC: ZCE7=0,ZCE6=0,ZCE5=0,ZCE4=0,ZCE3=0,ZCE2=0,ZCE1=0,ZCE0=0 */
   setReg(ADC_ADZCC,0);                 /* Set zero crossing control reg. */
   /* ADC_ADCR2: ??=0,STOP1=0,START1=0,SYNC1=0,EOSIE1=0,??=0,??=0,??=0,??=0,??=0,SIMULT=1,DIV=2 */
