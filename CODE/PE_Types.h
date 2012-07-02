@@ -6,7 +6,7 @@
 **     Component : PE_Types
 **     Version   : Driver 01.13
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/5/26, 20:26
+**     Date/Time : 2012/6/26, 8:56
 **     Abstract  :
 **         PE_Types.h - contains definitions of basic types,
 **         register access macros and hardware specific macros

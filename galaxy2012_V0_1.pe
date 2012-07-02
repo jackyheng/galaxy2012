@@ -1,11 +1,11 @@
 Processor Expert Version 0435
-ProjectModificationStamp=53
+ProjectModificationStamp=56
 
 [Header]
 Name=galaxy2012_V0_1
 SavedBy=Heng
-ModificationStamp=53
-Date=2012-06-03
+ModificationStamp=56
+Date=2012-06-25
 Product=Processor Expert version 3.00 for Freescale 56800/E family
 IDE=CW Plug-In IDE
 PEversion=4.35.0.5225
@@ -2461,7 +2461,7 @@ List=GrupItem
 ItemSymbol=AD20
 ReadOnly=No
 UserReadOnly=No
-Value=
+Value=ANA2_VREFH_GPIOC2
 [ItemState]
 ItemSymbol=AD2Signal0
 Value=
@@ -2542,7 +2542,7 @@ List=GrupItem
 ItemSymbol=AD21
 ReadOnly=No
 UserReadOnly=No
-Value=
+Value=ANA2_VREFH_GPIOC2
 [ItemState]
 ItemSymbol=AD2Signal1
 Value=
@@ -2623,7 +2623,7 @@ List=GrupItem
 ItemSymbol=AD22
 ReadOnly=No
 UserReadOnly=No
-Value=
+Value=ANA2_VREFH_GPIOC2
 [ItemState]
 ItemSymbol=AD2Signal2
 Value=
@@ -2704,7 +2704,7 @@ List=GrupItem
 ItemSymbol=AD23
 ReadOnly=No
 UserReadOnly=No
-Value=
+Value=ANA2_VREFH_GPIOC2
 [ItemState]
 ItemSymbol=AD2Signal3
 Value=
@@ -2785,7 +2785,7 @@ List=GrupItem
 ItemSymbol=AD24
 ReadOnly=No
 UserReadOnly=No
-Value=
+Value=ANA2_VREFH_GPIOC2
 [ItemState]
 ItemSymbol=AD2Signal4
 Value=

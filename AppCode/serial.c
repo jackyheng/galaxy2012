@@ -21,6 +21,7 @@ extern unsigned int speedL,speedR;
 extern float SUB,ADD;
 extern int   RIGHT,LEFT;
 extern unsigned int sensorValue[channal];
+extern bool standFlag;
 //----------------------------------------------------------------------------------
 
 
@@ -33,32 +34,29 @@ extern unsigned int sensorValue[channal];
     
 void sendData()
 {
-    debugWord[0] = (int)(g_fGravityAngle * 3);                 //把数据放大，方便观察波形
+    debugWord[0] = (int)(g_fGravityAngle * 3);             
     debugWord[1] = (int)(g_fGyroscopeAngleIntegral * 3);
-   /* SendNum(debugWord[0]);
-    AS1_SendChar(' ');
-    SendNum(debugWord[1]);  */   
-  
+    //SendNum(debugWord[0]);
+    //AS1_SendChar(' ');
+    //SendNum(debugWord[1]);
+    //-------------------------------------------------------        
+
+    //SendNum((int)(VOLTAGE_LEFT));
+    //AS1_SendChar(' '); 
+    
+    //SendNum((int)(VOLTAGE_RIGHT));
+    //AS1_SendChar(' ');      
 
 
-   
 
-    /*SendNum((int)(VOLTAGE_LEFT));
+    SendNum((int)nLeft);
     AS1_SendChar(' '); 
     
-    SendNum((int)(VOLTAGE_RIGHT));
+    SendNum((int)nRight);
     AS1_SendChar(' ');      
 
 
-
-    SendNum((int)LEFT);
-    AS1_SendChar(' '); 
-    
-    SendNum((int)RIGHT);
-    AS1_SendChar(' '); */     
-
-
-    //SendNum((int)g_fDirectionControlOutNew);
+    //SendNum((int)standFlag);
     //AS1_SendChar(' ');
     
     //SendNum((int)(ANGLE_CONTROL_P*100));
@@ -67,8 +65,9 @@ void sendData()
     //SendNum((int)(ANGLE_CONTROL_D*100));
     //AS1_SendChar(' ');
               
-//    SendNum((int)(speedL)); 
-//    AS1_SendChar(' ');
+    //SendNum((int)(g_nLeftMotorPulseSigma)); 
+    //AS1_SendChar(' ');
+    //SendNum((int)(g_nRightMotorPulseSigma)); 
 
   
 /*    SendNum((int)(speedControl()));
@@ -88,41 +87,40 @@ void sendData()
  //   AS1_SendChar(' ');  
  
 
-   // SendNum((int)(sensorValue[2]));
-   // AS1_SendChar(' '); 
+    //SendNum((int)(dianciValue[2]));
+    //AS1_SendChar(' '); 
     
+    //SendNum((int)(dianciValue[3]));
+    //AS1_SendChar(' '); 
+
+    //SendNum((int)(sensorValue[2]));
+    //AS1_SendChar(' ');    
     //SendNum((int)(sensorValue[3]));
     //AS1_SendChar(' '); 
 
-    //SendNum((int)(sensorZero[1]));
-    //AS1_SendChar(' '); 
-    
-    //SendNum((int)(sensorValue[1]));
-
-
 
  
-    SendNum((int)DIR_CONTROL_P);
+    //SendNum((int)DIR_CONTROL_P);
     //AS1_SendChar(' ');    
     //SendNum((int)DIR_CONTROL_D);
-      //SendNum((int)LEFT);
-      //AS1_SendChar(' ');  
+      //ndNum((int)LEFT);
+      //1_SendChar(' ');  
     
-      //SendNum((int)RIGHT);
-   // AS1_SendChar(' '); 
+      //ndNum((int)RIGHT);
+    //AS1_SendChar(' '); 
     
       //SendNum((int)VOLTAGE_LEFT);
       //AS1_SendChar(' '); 
       //SendNum((int)VOLTAGE_RIGHT);
     
         
-    //SendNum((int)ADD);
-   // AS1_SendChar(' ');
+    //SendNum((int)g_fDirectionControlOut);
+    //AS1_SendChar(' ');
         
-    //SendNum((int)sensorValue[2]);
+    //SendNum((int)(SUB * 1000));
     //AS1_SendChar(' ');
      
-   // SendNum((int)sensorValue[3]);
+    //SendNum((int)ADD);
 //    AS1_SendChar(' ');       
         
     AS1_SendChar(0x0d);                       
@@ -241,8 +239,8 @@ void receiveData()
      //SPEED_CONTROL_P=P;
      //SPEED_CONTROL_I=D; 
      
-       DIR_CONTROL_P=P;
-      // DIR_CONTROL_D=D;
+       //DIR_CONTROL_P=P;
+       //DIR_CONTROL_D=D;
 //     CAR_SPEED_SET=-D; 
     
 }

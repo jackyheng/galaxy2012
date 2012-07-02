@@ -46,48 +46,85 @@ unsigned char receive[15]={'0','0','.','0','0','0',' ','0','0','.','0','0','0'};
 int g_nSpeedControlCount=0;
 int g_nDirectionControlCount=0;
 bool AD_Flag = 0;
+bool UartFlag = 0; 
+bool standFlag = 0;
 //-------------------------------------------------------------------
 
 void main(void)
 {
-  
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
-  nLoop = 0;
-  
+  nLoop = 0; 
   SCIcount=0;
-  
   AD1_Start();
   Puls1_Enable();
   Puls2_Enable();
   TI1_DisableEvent();
-  Cpu_Delay100US(30);
-  if(!AD_Flag){
+  Cpu_Delay100US(10000);
+  
+  if(!AD_Flag)
+  {
         calibrateSensor();
         TI1_EnableEvent();
         AD_Flag = 1;
   }
  
+  //----------------------------------------------------------------
   for(;;) 
-  {
-    /*******************设置程序的循环时间，控制串口的发送速度******************/
-    
+  {   
     nLoop ++;
     if(nLoop >= LOOP_TIME) 	     
       nLoop = 0;
     else 
       continue;
+    
+   //----------------------------------------------------------------	
+    if((g_fGyroscopeAngleIntegral < 50.0) && (g_fGyroscopeAngleIntegral > -50.0))    //直立判断
+        standFlag = 1;
+    else if((g_fGyroscopeAngleIntegral >= 50.0) || (g_fGyroscopeAngleIntegral <= -50.0))
+        standFlag = 0;
+      
     //----------------------------------------------------------------
     Cpu_Delay100US(100);
-  
-    //----------------------------------------------------------------
-    receiveData();
-    sendData();
-    
 
+    if(UartFlag == 1)
+    {
+      sendData();          
+      UartFlag = 0; 
+    } 
+    receiveData();
   }
 }
+/*    
+                            _ 
+                          ,' \ 
+                        ,'    \...-. 
+                      ,'           | 
+                    ,'             | 
+                 _,'---    -.      `-._ 
+               ,'            `".       ) 
+            ,-'                 \     / 
+        ,..'-                    `.  (           _ 
+       (     ,--._     ,--._      `\  \        ,' |          
+      ,-'   _...._\ _,.._   \      `\  )      /   \__ 
+     /    ,'      ;'     `.          \/     ,/       ) 
+    |    |       |         \          `.   ,'.     ,' 
+    | O  :    O  |      O  |           '"--'  \   ( 
+    `._  |       \         '                  |    \ 
+     . --`.      _`-.___,,'                  ,'     ) 
+   .-      `'--.'  `-.__,,-'                ,'   ,-' 
+ ,'        '--.-'    .                  _       ( 
+(                   _.`--.-        `-..' `.      `. 
+ \             _,--'                  )   |   ,.--' 
+  '-.......---' 'v'""".      _Y      /    `.  | 
+                (_     ;----' |     (      `.,' 
+                  \   /_)     '-.   _) 
+                   `-'          `..' 
+
+
+*/
+
 
 /* END galaxy2012_V0_1 */
 /*

@@ -26,6 +26,9 @@ float ANGLE_CONTROL_D = 0.05;//0.37;                     //角度控制微分
 float g_fAngleControlOut;
 int VOLTAGE_LEFT;
 int VOLTAGE_RIGHT;
+unsigned int dianciValue[]={0,0};
+unsigned int dianciMax[]={380,350}; //830,550
+unsigned int dianciMin[]={90,45};//25
 
 extern float g_fLeftVoltageSigma;
 extern float g_fRightVoltageSigma;
@@ -58,7 +61,7 @@ void calibrateSensor()
 
 /**=================================================================================
   *
-  * 更新陀螺仪和加速度ADC的数据                2012-03-23
+  * 更新ADC的数据                2012-03-23
   *
   *=================================================================================
   */
@@ -80,17 +83,50 @@ void updataSensor()
 	}
 	AccValue = (int)(-1*(sensorValue[0] - AccOffset));
 	gyroValue = (int)(sensorValue[1] - sensorZero[1]) * -1;
-	gyroValue2 = (int)(sensorValue[4] - sensorZero[4]) * -1;
-
     VOLTAGE_LEFT = (int)sensorValue[2];	
-	VOLTAGE_RIGHT = (int)sensorValue[3];	
+	VOLTAGE_RIGHT = (int)sensorValue[3];		
+	gyroValue2 = (int)(sensorValue[4] - sensorZero[4]);	
+}
 
+
+/**=================================================================================
+  *
+  * 对电磁传感器的信号进行归一化                2012-06-26
+  *
+  *=================================================================================
+  */
+
+void DianciCalculate()
+{
+    int i;
+    long j,k,x;
+    
+    for(i=0; i<2; i++)
+    {
+    	if(sensorValue[i+2] <= dianciMin[i])
+    	{
+    		sensorValue[i+2] = dianciMin[i];
+    	}
+    	if(sensorValue[i+2] >= dianciMax[i])
+    	{
+    		sensorValue[i+2] = dianciMax[i];
+    	}
+    	
+    	j=0;k=0;x=0;
+        j = ((sensorValue[i+2]-dianciMin[i]));
+        j = j*100;
+        k = (dianciMax[i]-dianciMin[i]);
+        x = (j/k);
+        dianciValue[i] = (unsigned int)x;     
+    }
+    
+    for(i=0; i<2; i++)
+    {
+        if(dianciValue[i]<=5)    dianciValue[i] = 0;                      
+    }
 }
 	
 	
-	
-	
-
 /**=================================================================================
   *
   * 电磁数据处理                2012-05-7
@@ -100,19 +136,9 @@ void updataSensor()
 
 void DirectionVoltageSigma(void)
 {		
-	int nLeft, nRight;	
-		
-	
-	if(VOLTAGE_LEFT > LeftOffset) 		nLeft = VOLTAGE_LEFT - LeftOffset;
-	else nLeft = 0;
-	if(VOLTAGE_RIGHT > RightOffset) 	nRight = VOLTAGE_RIGHT - RightOffset;
-	else nRight = 0;
-
-	g_fLeftVoltageSigma += nLeft;
-	g_fRightVoltageSigma += nRight;
-		
+	g_fLeftVoltageSigma += dianciValue[0];
+	g_fRightVoltageSigma += dianciValue[1];		
 }
-
 	
 
 /**=================================================================================
@@ -125,8 +151,7 @@ void DirectionVoltageSigma(void)
 void AngleCalculate() 
 {	
     g_fGravityAngle = AccValue * GRAVITY_ANGLE_RATIO * 2.8444;
-	g_fGyroscopeAngleSpeed = gyroValue * GYROSCOPE_ANGLE_RATIO * 2.8444;
-	
+	g_fGyroscopeAngleSpeed = gyroValue * GYROSCOPE_ANGLE_RATIO * 2.8444;	
     complementaryFilter();	
 }
 
@@ -140,9 +165,8 @@ void AngleCalculate()
   
 void complementaryFilter()
 {
-	g_fGyroscopeAngleIntegral = ((0.99)*((g_fGyroscopeAngleIntegral) + 
-	(g_fGyroscopeAngleSpeed * GYROSCOPE_ANGLE_SIGMA_FREQUENCY)) + (0.01)*(g_fGravityAngle));
-		
+	g_fGyroscopeAngleIntegral = ((0.995)*((g_fGyroscopeAngleIntegral) + 
+	(g_fGyroscopeAngleSpeed * GYROSCOPE_ANGLE_SIGMA_FREQUENCY)) + (0.005)*(g_fGravityAngle));		
 }
  
 
@@ -155,14 +179,11 @@ void complementaryFilter()
 
 void AngleControl() 
 {
-	float fValue;	
-
-	fValue = (g_fGyroscopeAngleIntegral * ANGLE_CONTROL_P + g_fGyroscopeAngleSpeed * ANGLE_CONTROL_D); 
-	         
+	float fValue;
+		
+	fValue = (g_fGyroscopeAngleIntegral * ANGLE_CONTROL_P + g_fGyroscopeAngleSpeed * ANGLE_CONTROL_D); 	         
 	g_fAngleControlOut = fValue;	
 }
-
-
 
 
 

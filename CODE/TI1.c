@@ -6,7 +6,7 @@
 **     Component : TimerInt
 **     Version   : Component 02.157, Driver 02.02, CPU db: 2.87.097
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/5/27, 19:24
+**     Date/Time : 2012/6/26, 8:56
 **     Abstract  :
 **         This bean "TimerInt" implements a periodic interrupt.
 **         When the bean and its events are enabled, the "OnInterrupt"

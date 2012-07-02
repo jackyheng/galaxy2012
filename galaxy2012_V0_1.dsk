@@ -2,7 +2,7 @@
 PE_DesktopFileVersion=1077
 
 [Desktop]
-StartupPrj=C:\Users\Heng\Documents\GitHub\galaxy2012\galaxy2012_V0_1.pe
+StartupPrj=C:\Users\Heng\Desktop\galaxy2012\galaxy2012_V0_1.pe
 
 [PE_IDE_PlugIn]
 
@@ -23,7 +23,7 @@ ViewSizeIndex=0
 [ErrorPanel]
 Status=hiden
 WindowState=NORMAL
-Rect=[-8|58|1382|675]
+Rect=[-8|58|989|675]
 
 [ResourceMeter]
 Status=hiden

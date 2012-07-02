@@ -18,12 +18,12 @@
 #define GYROSCOPE_ANGLE_SIGMA_FREQUENCY    0.005                    //陀螺仪的测量周期
 #define GRAVITY_ADJUST_TIME_CONSTANT       2
 #define gyroOffset               1448//2651//2617                           //陀螺仪静止时的输出值
-#define AccOffset                2060//2049                           //加速度静止时的输出值
-#define RightOffset              90
-#define LeftOffset               109
+#define AccOffset                2049//2049                           //加速度静止时的输出值
+#define RightOffset              23
+#define LeftOffset               21
 //-------------------------------------------------------------------------------
 
-
+extern float g_fCarAngle;
 extern unsigned int nInputVoltage[];
 extern float AccValue;
 extern float gyroValue;
@@ -40,6 +40,7 @@ extern float  g_fAngleControlOut;
 extern float g_fLeftVoltageSigma;
 extern float g_fRightVoltageSigma;
 extern float gyroValue2;
+extern unsigned int dianciValue[2];
 //-------------------------------------------------------------------------------
 
 
@@ -49,5 +50,6 @@ void complementaryFilter();
 void AngleControl(void);
 void DirectionVoltageSigma(void);
 void calibrateSensor();
+void DianciCalculate();
 //-------------------------------------------------------------------------------
 #endif

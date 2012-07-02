@@ -7,7 +7,7 @@
 **     Version   : Component 01.022, Driver 02.08, CPU db: 2.87.097
 **     Datasheet :  MC56F8300UM/D - Rev. 1.0
 **     Compiler  : Metrowerks DSP C Compiler
-**     Date/Time : 2012/6/3, 12:29
+**     Date/Time : 2012/6/26, 8:56
 **     Abstract  :
 **
 **     Settings  :

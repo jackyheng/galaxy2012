@@ -263,7 +263,7 @@
         <Interrupt_priority v="medium priority"/>
         <Interrupt_preserve_registers v="yes"/>
       </boolgroup>
-      <list name="A/D channels" v="4">
+      <list name="A/D channels" v="5">
         <group name="Channel0">
           <A_D_channel__pin_ v="ANA0_GPIOC0"/>
           <A_D_channel__pin__signal v=""/>
@@ -281,6 +281,11 @@
         </group>
         <group name="Channel3">
           <A_D_channel__pin_ v="ANB1_GPIOC5"/>
+          <A_D_channel__pin__signal v=""/>
+          <boolgroup name="Mode select" v="Single Ended" />
+        </group>
+        <group name="Channel4">
+          <A_D_channel__pin_ v="ANB2_VREFL_GPIOC6"/>
           <A_D_channel__pin__signal v=""/>
           <boolgroup name="Mode select" v="Single Ended" />
         </group>
@@ -317,14 +322,20 @@
             <Offset v="0"/>
             <Zero_crossing v="Disabled"/>
           </boolgroup>
-          <boolgroup name="Sample4" v="Disabled" />
+          <boolgroup name="Sample4" v="Enabled">
+            <Channel v="4"/>
+            <High_limit v="32760"/>
+            <Low_limit v="0"/>
+            <Offset v="0"/>
+            <Zero_crossing v="Disabled"/>
+          </boolgroup>
           <boolgroup name="Sample5" v="Disabled" />
           <boolgroup name="Sample6" v="Disabled" />
           <boolgroup name="Sample7" v="Disabled" />
         </list>
       </boolgroup>
       <A_D_resolution sel_value="12 bits" v="Autoselect"/>
-      <Conversion_time v="1.594 &#181;s"/>
+      <Conversion_time v="4.250 &#181;s"/>
       <Trigger_configuration_wizard v="Click to run configurater &gt;"/>
       <boolgroup name="Internal trigger" v="Disabled" />
       <Volt__ref__recovery_time v="100"/>

@@ -23,11 +23,14 @@
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
 unsigned int oneMsCounter = 0;
+unsigned int oneHundredMsCounter = 0;
 extern unsigned int SCIcount;
 extern unsigned int speedL,speedR;
 extern int g_nSpeedControlCount;
 extern int g_nDirectionControlCount;
 extern bool AD_Flag;
+extern bool UartFlag;
+extern bool standFlag;
 //--------------------------------------------------------------------
 
 /*
@@ -71,8 +74,7 @@ void TI1_OnInterrupt(void)
 {
   oneMsCounter++;
   
-  //-------------------------------------------
-  
+  //------------------------------------------- 
     g_nspeedControPeriod ++;
   	speedControlOutput();
   //___________________________________________
@@ -98,31 +100,53 @@ void TI1_OnInterrupt(void)
   else if(oneMsCounter == 3)       
   {  
     g_nSpeedControlCount++;
-    if(g_nSpeedControlCount>=SPEED_CONTROL_COUNT)
+    oneHundredMsCounter++;
+    
+    if(g_nSpeedControlCount >= SPEED_CONTROL_COUNT)
     {
       speedControl();               //ËÙ¶È¿ØÖÆ
       g_nSpeedControlCount=0;
       g_nspeedControPeriod=0;	
     }
-
+    
+    if(standFlag){
+        if(oneHundredMsCounter == 100)         
+        {
+          if(CAR_SPEED_SET < speedNeed3)
+              CAR_SPEED_SET += 10;
+          else
+          {
+              CAR_SPEED_SET = speedNeed3;
+              speedStarEndFlag = 1;
+          }   
+          oneHundredMsCounter = 0;         
+        }
+    }
+    else
+    {
+        CAR_SPEED_SET = 0;
+        oneHundredMsCounter = 0;
+        speedStarEndFlag = 0;
+    }
   }
 //--------------------------------------------------  
   else if(oneMsCounter == 4)       
   {
       g_nDirectionControlCount ++;
+      DianciCalculate();
       DirectionVoltageSigma();
       if(g_nDirectionControlCount >= DIRECTION_CONTROL_COUNT) {
           DirectionControl();
           g_nDirectionControlCount = 0;
           g_nDirectionControlPeriod = 0;
-      }
-  	  
+      }  	  
   }
 //-------------------------------------------------  
   else if(oneMsCounter >= 5)
   {
   	oneMsCounter = 0; 
   	GetMotorPulse();
+  	UartFlag = 1;
   }
 }
 
