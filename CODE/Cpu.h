@@ -28,7 +28,7 @@
 **     mail      : support@freescale.com
 ** ###################################################################*/
 
-#ifndef __Cpu_H
+//#ifndef __Cpu_H
 #define __Cpu_H
 
 /* MODULE Cpu. */

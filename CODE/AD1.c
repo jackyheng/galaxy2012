@@ -111,7 +111,6 @@
 /* MODULE AD1. */
 
 #include "Events.h"
-#include "AD1.h"
 
 #define IDLE            0              /* IDLE state           */
 #define MEASURE         1              /* MESURE state         */
